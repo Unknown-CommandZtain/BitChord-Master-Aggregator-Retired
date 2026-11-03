@@ -579,22 +579,6 @@ A port needs equivalents for:
 | **3.6.0** | Faster resolution and lossy rejection |
 | **3.5.0** | Cross-provider FLAC rescue |
 
-### Research notes (not shipping integrations)
-
-The project has considered Funkwhale, Audius, ccMixter, Soulseek, and other architectures. Exploration does **not** establish compatible, authorized FLAC handoff. Earlier LastWave sample files showed FLAC signatures, but original lossless provenance was inconclusive. FLACidal is an architectural reference rather than a Cloudflare streaming source. **FlacMusicFinder remains deliberately excluded** because the API and security/reliability concerns were not resolved. These are not recommendations to bypass rights or provider terms.
-
-### Potential future improvements (not yet implemented)
-
-- **v3.7.17-p9 candidate:** reduce ineffective provider timeouts, improve safe provider recovery, and distinguish catalog availability from verified stream availability without weakening track matching.
-- **Multilingual discovery:** better matching and bounded rescue for queries that produce incorrect candidates, rather than triggering only on completely empty searches.
-- **DASH investigation:** assess whether a compatible and authorized direct FLAC media path exists. Do not treat a `.mpd` label as working FLAC or bypass DRM.
-- **Longer-term provider evidence:** compare multiple genres, times, and recording versions using privacy-safe summaries; a single window is insufficient.
-- **Privacy hardening:** authenticated personal-library playback, protected search results, non-enumerable personal IDs, and access controls on the Health dashboard.
-- **Durable ranking (concept):** globally aggregate safe performance evidence in an explicitly designed store. The present shared diagnostics DO **does not do this**.
-- **Pathfinder (research only):** an opt-in authorized-catalog discovery/indexing layer, potentially using D1. No D1 crawler or universal FLAC finder is shipped in p8.
-
-**No guarantee of every-song FLAC, globally consistent provider status, DRM playback, or native DASH FLAC support is made for p8.**
-
 ## Further reading
 
 - [Cloudflare Workers: dashboard quickstart](https://developers.cloudflare.com/workers/get-started/dashboard/)
