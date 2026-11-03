@@ -2,7 +2,7 @@
 
 **A practical reference guide to a FLAC-first music addon written in JavaScript for Cloudflare Workers.** This README explains the architecture, setup, source management, diagnostic tools, performance trade-offs, and lessons learned so that other developers can build **their own permission-aware aggregators**.
 
-> **Current private reference:** `v3.7.17-p8` (manifest version `3.7.17`, patch revision `p8`)  
+> **Current private reference:** `v3.7.17-p8-stable` (manifest version `3.7.17`, patch revision `p8`)  
 > **Last documentation review:** 2026-11-03  
 > **Platform:** Cloudflare Workers (JavaScript)  
 > **Client interface:** BitChord-compatible `manifest`, `search`, and `stream` endpoints  
@@ -47,7 +47,7 @@ Its design goals are:
 - **Observable outcomes:** distinguish catalog search, byte-level probe, Worker handoff, and client playback.
 - **Optional storage:** separate personal library and permitted 36-hour temporary cache, not enabled by default.
 
-| Capability | Private reference implementation `v3.7.17-p8` |
+| Capability | Private reference implementation `v3.7.17-p8-stable` |
 | --- | --- |
 | Provider IDs | Stable slots `discord_0` through `discord_11` (12 total); `0`, `5`, `6`, `9` retired/reserved |
 | Ordinary provider configuration | `discord_1`–`discord_4`, `discord_7`, `discord_8`; endpoint overrides and enable switches |
@@ -170,7 +170,7 @@ A candidate provider needs a documented and compatible search/stream API, reason
 
 **No live manifest URLs, signed stream links, tokens, or rotating credentials are included in this public README.** Supply and test your own authorized integrations.
 
-### Stable provider IDs in `v3.7.17-p8`
+### Stable provider IDs in `v3.7.17-p8-stable`
 
 | Slot(s) | Role | Lifecycle policy |
 | --- | --- | --- |
@@ -228,7 +228,7 @@ The Worker prioritizes providers using a **seeded order plus recent per-isolate 
 
 **Reference implementation limits** (not end-to-end response guarantees):
 
-| Setting | Value in `v3.7.17-p8` |
+| Setting | Value in `v3.7.17-p8-stable` |
 | --- | --- |
 | Main search budget | 4,800 ms |
 | Initial staged-search wait | 1,050 ms |
@@ -285,7 +285,7 @@ When the upstream provides actual E-AC-3 JOC metadata and the client explicitly 
 
 ## Environment variables and Cloudflare bindings
 
-These are names used by the **private `v3.7.17-p8` reference**, not universal BitChord requirements. Configure only features you actually need.
+These are names used by the **private `v3.7.17-p8-stable` reference**, not universal BitChord requirements. Configure only features you actually need.
 
 | Variable or binding | Kind | Purpose |
 | --- | --- | --- |
@@ -386,7 +386,7 @@ const PERSONAL_FLAC_TRACKS = [
 The existing route is `/audio/personal/{index}.flac`, with GET/HEAD and byte-range support.
 
 > [!CAUTION]
-> **Current privacy limitation:** This route is **not authenticated in v3.7.17-p8**. A private R2 bucket does not make a public Worker route private. Anyone who discovers a valid personal-audio URL/index may retrieve the file. Do **not** put private or non-redistributable recordings behind this public endpoint. Before using it as a truly private library, implement and test authentication, authorization, non-enumerable access, and protected searches.
+> **Current privacy limitation:** This route is **not authenticated in v3.7.17-p8-stable**. A private R2 bucket does not make a public Worker route private. Anyone who discovers a valid personal-audio URL/index may retrieve the file. Do **not** put private or non-redistributable recordings behind this public endpoint. Before using it as a truly private library, implement and test authentication, authorization, non-enumerable access, and protected searches.
 
 ### B. Temporary cache: `FLAC_CACHE_BUCKET`
 
@@ -548,9 +548,9 @@ A port needs equivalents for:
 
 ## Development history and roadmap
 
-### Current private reference: `v3.7.17-p8`
+### Current private reference: `v3.7.17-p8-stable`
 
-- Public manifest version remains **`3.7.17`** while patch revision `p8` is surfaced through the Health/diagnostic responses.
+- Public manifest version remains **`3.7.17`** while patch revision `p8-stable` is surfaced through the Health/diagnostic responses.
 - p8 allows a narrowly restricted CJK title-only recovery search when a query uses an explicit title/artist separator and initial eligible lossless results are empty; returned tracks still face strict title/artist matching.
 - p7 includes authenticated, on-demand source sampling and conservative direct-FLAC stream checks. A source-check result is a **single-sample diagnostic**, not playback proof.
 - The 3.7.17 line includes a read-only Health dashboard, optional Cloudflare Analytics/R2 resource metrics, rolling sanitized FLAC failure diagnostics with an optional shared Durable Object, more careful recording matching, bounded retries, and safer handling of retired/rotating provider slots.
@@ -561,7 +561,7 @@ A port needs equivalents for:
 
 | Version | Main development milestone |
 | --- | --- |
-| **3.7.17-p8** | Explicit-title/artist CJK search retry for eligible empty searches; strict original-query filtering |
+| **3.7.17-p8-stable** | Explicit-title/artist CJK search retry for eligible empty searches; strict original-query filtering |
 | **3.7.17-p7** | Authenticated one-provider source check; fail-closed source and stream compatibility behavior |
 | **3.7.17 (earlier patches)** | Bounded search recovery, safe diagnostics, Health dashboard, shared optional FLAC counters, provider/session safeguards |
 | **3.7.10** | Adaptive performance-based provider ordering while retaining saved track indices |
