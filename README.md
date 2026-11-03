@@ -1,4 +1,4 @@
-# BitChord FLAC Aggregator 🎧
+# BitChord FLAC Aggregator Addon by Unknown_CommandZtain 🎧
 
 **A practical reference guide to a FLAC-first music addon written in JavaScript for Cloudflare Workers.** This README explains the architecture, setup, source management, diagnostic tools, performance trade-offs, and lessons learned so that other developers can build **their own permission-aware aggregators**.
 
