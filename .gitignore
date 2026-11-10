@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+.wrangler/
+node_modules/
+*.log
+*.private.*
+*PRIVATE*
+*secret*
+*.bak
