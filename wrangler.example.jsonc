@@ -1,0 +1,7 @@
+// Educational sample only; no secrets, account IDs, buckets, or cron triggers.
+// Carefully review and secure the code before any independently authorized deployment.
+{
+  "name": "music-metadata-reference",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-11-02"
+}
